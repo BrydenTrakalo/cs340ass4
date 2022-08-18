@@ -2,6 +2,7 @@
 #include "dfs.h"
 #include "bfs.h"
 #include "best1.h"
+#include "best2.h"
 #include <iostream>
 
 using namespace std;
@@ -33,13 +34,8 @@ int main(){
 
     }
 
-    cout << "The intial state is: " << endl;
+    cout << "The intial state is: which has " << totDist(puzzle) << " min moves to solve" << endl;
     printGame(puzzle);
-
-
-
-    cout << "is same state?" << isSameState(puzzle, puzzle) << endl;
-
 
     cout << "Now please input a search method. \n'd' - depth first search. \n'b' - breadth first search. \n'x' - Best first with # of tiles out of place. \n'y' - best first with min # of moves to goal state. \n'z' best frist with heuristic H." << endl;
     cin >> input;
@@ -50,6 +46,7 @@ int main(){
     DepthFirstSearch dfs;
     BreadthFirstSearch bfs;
     Best1Search best1;
+    Best2Search best2;
     switch (input){
         case 'd':
             soluPath = dfs.search(puzzle, initPath);
@@ -64,7 +61,8 @@ int main(){
             nodesGenerated = best1.closedSet.size();
             break;
         case 'y':
-            //min # of moves
+            soluPath = best2.search(puzzle);
+            nodesGenerated = best2.closedSet.size();
             break;
         case 'z':
             //H

@@ -108,3 +108,53 @@ int numOfTilesOutOfPlace(int* currentState){
     }
     return numOutOfPlace;
 }
+
+//positionofnum[0] should hold the position of 0 ont he puzzle. [1] will hold position 1, 
+int totDist(int* currentState){
+    int* goalPosition = new int[9];
+    goalPosition[0] = 4; goalPosition[1] = 0; goalPosition[2] = 1; goalPosition[3] = 2; goalPosition[4] = 5; goalPosition[5] = 8; goalPosition[6] = 7; goalPosition[7] = 6; goalPosition[8] = 3; 
+
+    int positionOfNum[9];
+    int totalMoves = 0;
+
+    for (int i = 0; i < 9; i++){
+       for (int j = 0; j < 9; j++){
+            if(currentState[j] == i){
+                positionOfNum[i] = j;
+            }
+        }
+    }
+
+    for (int i = 1; i < 9; i++){
+        //cout << "checking on " << i << " which is " << positionOfNum[i] << " on the puzzle and is " << goalPosition[i] << " on the goal" << endl;
+        while((positionOfNum[i]%3) != (goalPosition[i]%3)){ //Move the position to be on the same row as the goal position
+            //cout << i << " are not in line " << positionOfNum[i] << " " << goalPosition[i] << endl;
+            //cout << "comparison " << positionOfNum[i]%3 << " and " << goalPosition[i]%3 << endl;
+            if(positionOfNum[i]%3 > goalPosition[i]%3){
+                positionOfNum[i] -= 1;
+                totalMoves++;
+            }
+            if(positionOfNum[i]%3 < goalPosition[i]%3){
+                positionOfNum[i] += 1;
+                totalMoves++;
+            }
+        }
+        while(positionOfNum[i] != goalPosition[i]){ //Shift up and down the puzzle until they match
+            //cout << i << " are not matching " << positionOfNum[i] << " " << goalPosition[i] << endl;
+            if(positionOfNum[i] > goalPosition[i]){
+                //cout << "too big" << endl;
+                positionOfNum[i] -= 3;
+                totalMoves++;
+            }
+            if(positionOfNum[i] < goalPosition[i]){
+                //cout << "too small" << endl;
+                positionOfNum[i] += 3;
+                //cout << positionOfNum[i] << " is now " << 
+                totalMoves++;
+            }
+
+        }
+    }
+
+    return totalMoves;
+}
