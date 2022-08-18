@@ -1,4 +1,4 @@
-assign3bwt562: main.o dfs.o bfs.o best1.o puzzleGame.o
+assign3bwt562: main.o dfs.o bfs.o best1.o best2.o best3.o puzzleGame.o
 	g++ -o assign3bwt562 main.o dfs.o bfs.o best1.o best2.o best3.o puzzleGame.o
 
 main.o: main.cpp dfs.o bfs.o best1.o puzzleGame.o
