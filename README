@@ -1,8 +1,8 @@
 Bryden Trakalo  
 200393397
 
-To Compile: use 'make' to run the makefile and use ./assign4bwt562 to execute it
+To Compile: use 'make' to run the makefile and use ./assign4bwt562 to execute the program
 
 to Operate porgram. 
     You are frist required to enter the numbers needed to generate the puzzle. Follow instructions printed, or enter 'a' or 'b' for a default configuration.
-    Enter a letter corresponding to a 
+    Enter a letter corresponding to a search algorithm

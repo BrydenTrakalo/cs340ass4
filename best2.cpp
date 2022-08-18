@@ -4,6 +4,9 @@
 
 using namespace std;
 
+    // A search alorithm that uses depth + min numbers of moves as a priority in the queue
+    // The code is very similar to BFS. please check there for comments about the algorithm, and best1 for comments about the priority
+    // The logic for min moves is in puzzleGame.cpp
 list<int*> Best2Search::search(int* currentState){
     int depth = 0;
     int priority;
@@ -26,7 +29,7 @@ list<int*> Best2Search::search(int* currentState){
         }else{
             bestPrority = 9999;
             bestFIter = fringe.begin();
-            for (fIter = fringe.begin(); fIter != fringe.end(); fIter++){
+            for (fIter = fringe.begin(); fIter != fringe.end(); fIter++){        //Select next state based off of priority
                 if(get<2>(*fIter) < bestPrority){
                     bestPrority = get<2>(*fIter);
                     bestFIter = fIter;
@@ -84,7 +87,7 @@ list<int*> Best2Search::search(int* currentState){
             path = get<1>(currentElement);
             path.push_front(currentState);
 
-            priority = depth + totDist(*iter);
+            priority = depth + totDist(*iter);      //Create priority
 
             fringeElement = make_tuple(*iter, path, priority);
             fringe.push_front(fringeElement);

@@ -4,10 +4,10 @@
 
 using namespace std;
 
-class DepthFirstSearch {
+class Best3Search {
 public:
     list<int*> closedSet;
-    list<tuple<int*, list<int*>>> fringe;
+    list<tuple<int*, list<int*>, int>> fringe;
 
     list<int*> search(int*);
 };

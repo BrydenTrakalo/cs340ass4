@@ -3,11 +3,12 @@
 #include "bfs.h"
 #include "best1.h"
 #include "best2.h"
+#include "best3.h"
 #include <iostream>
 
 using namespace std;
 
-
+    //Driver code for the searching algorithms
 int main(){
     cout << "What intial position would oyu like to use? Enter the numbers 0-8 in any order with a space between each. 0 will be the empty space. Numbers will be placed left-right, top-down starting at the top left of the puzzle." << endl;
     cout << "Input 'a' to use a default puzzle with a 1 move solution" << endl;
@@ -16,6 +17,7 @@ int main(){
     int* puzzle;
     puzzle = new int[9];
 
+    //Build the puzzle
     for (int i = 0; i < 9; i++){
         cin >> input;
         switch (input){
@@ -34,23 +36,23 @@ int main(){
 
     }
 
-    cout << "The intial state is: which has " << totDist(puzzle) << " min moves to solve" << endl;
+    cout << "The intial state is: which has " << totDist(puzzle) << " min moves to solve, witch a Sequence score of " << seq(puzzle) << endl;
     printGame(puzzle);
 
     cout << "Now please input a search method. \n'd' - depth first search. \n'b' - breadth first search. \n'x' - Best first with # of tiles out of place. \n'y' - best first with min # of moves to goal state. \n'z' best frist with heuristic H." << endl;
     cin >> input;
 
     int nodesGenerated;
-    list<int*> initPath;
     list<int*> soluPath;
     DepthFirstSearch dfs;
     BreadthFirstSearch bfs;
     Best1Search best1;
     Best2Search best2;
+    Best3Search best3;
     switch (input){
         case 'd':
-            soluPath = dfs.search(puzzle, initPath);
-            nodesGenerated = dfs.fringe.size() + dfs.closedSet.size() - 1;
+            soluPath = dfs.search(puzzle);
+            nodesGenerated = dfs.closedSet.size();
             break;
         case 'b':
             soluPath = bfs.search(puzzle);
@@ -65,20 +67,16 @@ int main(){
             nodesGenerated = best2.closedSet.size();
             break;
         case 'z':
-            //H
+            soluPath = best3.search(puzzle);
+            nodesGenerated = best3.closedSet.size();
             break;
         default:
             cout << "Hey!";
             break;
     }
 
-    //do the search
     cout << "The solution path is: " << endl;
     list<int*>::iterator iter;
-    // for (iter = soluPath.begin(); iter != soluPath.end(); iter++){
-    //     printGame(*iter);
-    //     cout << "then..." << endl;
-    // }
     int loopAmount = soluPath.size();
     for (int i = 0; i < loopAmount; i++){
         printGame(soluPath.back());
@@ -87,10 +85,7 @@ int main(){
             cout << "then..." << endl;
         }
     }
-
     cout << "the amount of nodes generated is: " << nodesGenerated << endl;
-
-
 
     return 0;
 }
